@@ -7,7 +7,7 @@ class ManageArtist {
         $this->bd = $bd;
     }
 
-    function set(Usuario $usuario) {
+    function set(Artist $usuario) {
         //return $this->bd->update($this->tabla, $city->get());
         $paramsWhere = array();
         $paramsWhere["email"] = $usuario->getEmail();

@@ -49,6 +49,7 @@ class ControladorArtist {
         $email = $usuario->getEmail();
         $alias = $usuario->getAlias();
         $artista = self::getArtist($sesion);
+        var_dump($artista->getGaleria());
         $input = '<label>Gallery: <input type="text" class="form-control" name="id" value="' . $artista->getGaleria() . '" placeholder="Galeria: ' . $artista->getGaleria() . '"></label>';
         $upload = $plantilla->replace("select_galeria", $input, $upload);
 
@@ -136,6 +137,7 @@ class ControladorArtist {
 
         $datos_form = array(
             "action" => "?action=edit&do=Set",
+            "method" => "POST",
             "type1" => "text",
             "type2" => "text",
             "type3" => "textarea",
@@ -164,6 +166,7 @@ class ControladorArtist {
             "descripcion" => $sesion->getUser()->getAlias(),
             "login" => "",
             "formulario" => $formulario,
+            "mensajes" => "",
             "profile" => "",
             "upload" => "",
             "gallery" => "",
@@ -176,13 +179,11 @@ class ControladorArtist {
         $bd = new BaseDatos(); 
         $sesion=new Session();
         $artista=self::getArtist($sesion);
-        $gestor_artista=new ManageArtist();
+        $gestor_artista=new ManageArtist($bd);
         $titulo=Request::post("titulo"); 
         $descripcion = Request::post("descripcion");
-        $galeria = Request::post("galeria");
-        $style = Request::post("style");
-        
-        $artista = new Artist($artista->getEmail(), $titulo, $descripcion, $galeria, $style);
+        $perfil=Request::post("perfil"); 
+        $artista = new Artist($artista->getEmail(), $titulo, $descripcion, $perfil, $artista->getGaleria(), $artista->getStyle());
         $r = $gestor_artista->set($artista);
         header("Location:?op=edit&r=$r&action=read&do=View");
     }
