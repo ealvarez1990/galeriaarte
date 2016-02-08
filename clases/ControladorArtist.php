@@ -72,6 +72,16 @@ class ControladorArtist {
 //RELLENO PAGINA
         $info = "<br>Artista: " . $alias . "<br> Galeria: " . $artista->getTitulo();
         $profile = $plantilla->replace("perfil", $artista->getPerfil(), $profile);
+        $men="";
+        if(Request::req("op")==""){
+            $men="";
+        }else{
+            if(Request::req("r")>=0)
+            $men="Operacion: ".Request::req("op")." Resultado: Exito";
+        }
+        
+        
+        
         $datos = array(
             "nav" => $nav,
             "work" => $trabajo,
@@ -81,12 +91,13 @@ class ControladorArtist {
             "descripcion" => $artista->getDescripcion(),
             "login" => "",
             "formulario" => "",
+            "mensajes" => "$men",
             "profile" => $profile,
             "upload" => $upload,
             "gallery" => $elementos,
             "contact" => $contact,
         );
-        echo $plantilla->insertTemplate($vista, $datos);
+       echo $plantilla->insertTemplate($vista, $datos);
     }
 
 //------------------------------------------------------------------------------
@@ -161,17 +172,19 @@ class ControladorArtist {
         echo $plantilla_editar->insertTemplate($vista, $datos);
     }
 
-    private static function editSet($gestor) {
-
-        $page = Request::post("page");
-        $ID = Request::post("pkID");
-        $Name = Request::post("Name");
-        $CountryCode = Request::post("CountryCode");
-        $District = Request::post("District");
-        $Population = Request::post("Population");
-        $city = new City($ID, $Name, $CountryCode, $District, $Population);
-        $r = $gestor->set($city);
-        header("Location:?op=edit&r=$r");
+    private static function editSet() {
+        $bd = new BaseDatos(); 
+        $sesion=new Session();
+        $artista=self::getArtist($sesion);
+        $gestor_artista=new ManageArtist();
+        $titulo=Request::post("titulo"); 
+        $descripcion = Request::post("descripcion");
+        $galeria = Request::post("galeria");
+        $style = Request::post("style");
+        
+        $artista = new Artist($artista->getEmail(), $titulo, $descripcion, $galeria, $style);
+        $r = $gestor_artista->set($artista);
+        header("Location:?op=edit&r=$r&action=read&do=View");
     }
 
     private static function insertSet() {
