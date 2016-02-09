@@ -41,7 +41,7 @@ class ControladorArtist {
         $nav = $plantilla->getContents("../_plantilla1/_nav.html");
         $profile = $plantilla->getContents("../_plantilla1/_profile.html");
         $upload = $plantilla->getContents("../_plantilla1/_upload.html");
-        $gallery = $plantilla->getContents("../_plantilla1/_gallery.html");
+        $gallery = $plantilla->getContents("../_plantilla1/_gallery_user.html");
         $trabajo = $plantilla->getContents("../_plantilla1/_work.html");
         $edit = $plantilla->getContents("../_plantilla1/_edit.html");
         $contact = $plantilla->getContents("../_plantilla1/_contact.html");
@@ -73,16 +73,16 @@ class ControladorArtist {
 //RELLENO PAGINA
         $info = "<br>Artista: " . $alias . "<br> Galeria: " . $artista->getTitulo();
         $profile = $plantilla->replace("perfil", $artista->getPerfil(), $profile);
-        $men="";
-        if(Request::req("op")==""){
-            $men="";
-        }else{
-            if(Request::req("r")>=0)
-            $men="Operacion: ".Request::req("op")." Resultado: Exito";
+        $men = "";
+        if (Request::req("op") == "") {
+            $men = "";
+        } else {
+            if (Request::req("r") >= 0)
+                $men = "Operacion: " . Request::req("op") . " Resultado: Exito";
         }
-        
-        
-        
+
+
+
         $datos = array(
             "nav" => $nav,
             "work" => $trabajo,
@@ -98,7 +98,7 @@ class ControladorArtist {
             "gallery" => $elementos,
             "contact" => $contact,
         );
-       echo $plantilla->insertTemplate($vista, $datos);
+        echo $plantilla->insertTemplate($vista, $datos);
     }
 
 //------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class ControladorArtist {
         header('Location:../frontend/index.php');
     }
 
-
+//EDITS------------------------------------------------------------------------
 //EDIT VIEW
     private static function editView($gestor) {
         $plantilla_editar = new Template();
@@ -175,19 +175,22 @@ class ControladorArtist {
         echo $plantilla_editar->insertTemplate($vista, $datos);
     }
 
+    //EDIT SET
     private static function editSet() {
-        $bd = new BaseDatos(); 
-        $sesion=new Session();
-        $artista=self::getArtist($sesion);
-        $gestor_artista=new ManageArtist($bd);
-        $titulo=Request::post("titulo"); 
+        $bd = new BaseDatos();
+        $sesion = new Session();
+        $artista = self::getArtist($sesion);
+        $gestor_artista = new ManageArtist($bd);
+        $titulo = Request::post("titulo");
         $descripcion = Request::post("descripcion");
-        $perfil=Request::post("perfil"); 
+        $perfil = Request::post("perfil");
         $artista = new Artist($artista->getEmail(), $titulo, $descripcion, $perfil, $artista->getGaleria(), $artista->getStyle());
         $r = $gestor_artista->set($artista);
         header("Location:?op=edit&r=$r&action=read&do=View");
     }
 
+    //----------------------------------------------------------------------------
+    //INSERT SET - Subida de imagenes
     private static function insertSet() {
         $bd = new BaseDatos();
         $gestor_galeria = new ManageGallery($bd);
@@ -203,18 +206,24 @@ class ControladorArtist {
         $file->setTamanio(52428800);
         $file->addTipo("gif");
         var_dump($file->upload());
-        $imagen_ruta = "../img/" . $nombre. "." . $file->getExtension();
+        $imagen_ruta = "../img/" . $nombre . "." . $file->getExtension();
         $gallery = new Gallery($id, 0, $imagen_ruta, $descripcion);
         $r = $gestor_galeria->insert($gallery);
-        header("Location:?op=insert&r=$r&action=read&do=View");
+        header("Location:?op=insert&r=$r&action=read&do=View#section3");
     }
+
 //DELETE
     private static function deleteSet() {
         $bd = new BaseDatos();
         $gestor_galeria = new ManageGallery($bd);
-        $r=$gestor_galeria->delete(Request::req("id"));
-        header("Location:?op=insert&r=$r&action=read&do=View#section3");
+        $id_imagen=Request::req("id");
+        $imagen=$gestor_galeria->get($id_imagen)->getImagen();
+        $r = $gestor_galeria->delete($id_imagen);
+        unlink($imagen);
+        var_dump($id_imagen);
+       // header("Location:?op=insert&r=$r&action=read&do=View#section3");
     }
+
 //CONSULTA A LA SESION POR EL USUARIO, ESTRAE EMAIL, Y BUSCA EN LA TABLA ARTISTA
     private static function getArtist(Session $sesion) {
         $bd = new BaseDatos();
