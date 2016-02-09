@@ -49,7 +49,6 @@ class ControladorArtist {
         $email = $usuario->getEmail();
         $alias = $usuario->getAlias();
         $artista = self::getArtist($sesion);
-        var_dump($artista->getGaleria());
         $input = '<label>Gallery: <input type="text" class="form-control" name="id" value="' . $artista->getGaleria() . '" placeholder="Galeria: ' . $artista->getGaleria() . '"></label>';
         $upload = $plantilla->replace("select_galeria", $input, $upload);
 
@@ -200,16 +199,19 @@ class ControladorArtist {
         $id = Request::post("id");
 
         $file = new FileUpload("imagen");
-        $nombre = $artista->getGaleria() . "_" . ($gestor_galeria->count() + 1);
+        var_dump($gestor_galeria->count());
+        $nombre = $artista->getGaleria() . "_" . ($gestor_galeria->count() + 1).sha1($file->getNombre());
         $file->setNombre($nombre);
         $file->setDestino("../img/");
         $file->setTamanio(52428800);
+        $file->getPolitica(FileUpload::RENOMBRAR);
         $file->addTipo("gif");
-        var_dump($file->upload());
-        $imagen_ruta = "../img/" . $nombre . "." . $file->getExtension();
+        $file->upload();
+        
+        $imagen_ruta = "../img/" . $file->getNombre() . "." . $file->getExtension();
         $gallery = new Gallery($id, 0, $imagen_ruta, $descripcion);
         $r = $gestor_galeria->insert($gallery);
-        header("Location:?op=insert&r=$r&action=read&do=View#section3");
+        //header("Location:?op=insert&r=$r&action=read&do=View#section3");
     }
 
 //DELETE
@@ -220,8 +222,7 @@ class ControladorArtist {
         $imagen=$gestor_galeria->get($id_imagen)->getImagen();
         $r = $gestor_galeria->delete($id_imagen);
         unlink($imagen);
-        var_dump($id_imagen);
-       // header("Location:?op=insert&r=$r&action=read&do=View#section3");
+        header("Location:?op=insert&r=$r&action=read&do=View#section3");
     }
 
 //CONSULTA A LA SESION POR EL USUARIO, ESTRAE EMAIL, Y BUSCA EN LA TABLA ARTISTA

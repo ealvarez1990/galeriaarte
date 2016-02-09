@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+
     $('.carousel').carousel({interval: false});
 
     /* affix the navbar after scroll below header */
@@ -62,12 +63,20 @@ $(document).ready(function () {
         $('#modalCarousel').carousel(id); // slide carousel to selected
         return false;
     });
-    
+
     "use strict";
     $("#confirmaborrado").on("click", function (event) {
+
+        window.location.reload();
         if (!confirm('Are you sure you want to delete this picture?')) {
             event.preventDefault();
+            console.log("borrado");
         }
+    });
+
+    $("#subir").on("click", function (event) {
+
+        window.location.reload();
     });
 
 

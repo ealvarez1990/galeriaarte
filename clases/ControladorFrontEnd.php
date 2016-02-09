@@ -22,12 +22,12 @@ private static function readView() {
         $nav = $plantilla->getContents("../_plantilla1/_nav.html");
         $login = $plantilla->getContents("../_plantilla1/_login.html");
         $gallery = $plantilla->getContents("../_plantilla1/_gallery.html");
-        
-        
+        $gestor=new ManageArtist($bd);
         //Todos los Artistas
         $gestorimagenes=new ManageGallery($bd);
         $imagenes=$gestorimagenes->getList();
         $elementos="";
+        
         
        
          foreach ($imagenes as $key => $imagen) {
