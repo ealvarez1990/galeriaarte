@@ -31,7 +31,8 @@ class ControladorFrontEnd {
         $artistas_plantilla = $plantilla->getContents("../_plantilla1/_artistas.html");
         $lista_artistas = $plantilla->getContents("../_plantilla1/_lista-artistas.html");
 
-        //Todos los Artistas
+
+        //Todos los Artistas -------------------------------------
         $usuarios = $gestorUsuario->getList();
         $imagenes = $gestorimagenes->getList();
         $elementos = "";
