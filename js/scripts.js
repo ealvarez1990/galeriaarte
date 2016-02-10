@@ -1,6 +1,10 @@
 
 $(document).ready(function () {
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> ff3f3ddc08a5ef4a24ee6e6a74ad38820b1cb951
     $('.carousel').carousel({interval: false});
 
     /* affix the navbar after scroll below header */
@@ -63,6 +67,7 @@ $(document).ready(function () {
         $('#modalCarousel').carousel(id); // slide carousel to selected
         return false;
     });
+<<<<<<< HEAD
     
     console.log("12borrado");
     "use strict";
@@ -77,6 +82,22 @@ $(document).ready(function () {
      $("#subir").on("click", function (event) {
         
         window.location.reload();  
+=======
+
+    "use strict";
+    $("#confirmaborrado").on("click", function (event) {
+
+        window.location.reload();
+        if (!confirm('Are you sure you want to delete this picture?')) {
+            event.preventDefault();
+            console.log("borrado");
+        }
+    });
+
+    $("#subir").on("click", function (event) {
+
+        window.location.reload();
+>>>>>>> ff3f3ddc08a5ef4a24ee6e6a74ad38820b1cb951
     });
 
 
