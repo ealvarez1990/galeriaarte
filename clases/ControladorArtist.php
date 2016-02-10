@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 <?php
 
-class ControladorArtist {
+class ControladorArtist { //Contola lo sperfiles de usuario
 
     private $id = NULL;
 
