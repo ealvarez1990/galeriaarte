@@ -1,0 +1,11 @@
+<section class="bg-3">
+    <div class="col-sm-6 col-sm-offset-3 text-center"><h2>Upload</h2></div>
+    <form class="form-search col-sm-6 col-sm-offset-3 text-center" action="?action=insert&do=Set" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Image: <input class="form-control" type="file" name="imagen" value="" placeholder="file select"></label>
+            {select_galeria}
+            <label>Image caption: <input class="form-control" type="text" name="descripcion" value="" placeholder="image caption"></label>
+            <input class="btn bg-primary" type="submit" value="Subir">
+        </div> 
+    </form>
+</section>

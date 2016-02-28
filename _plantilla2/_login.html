@@ -1,0 +1,33 @@
+<div class="row">
+     <h4>Enter:</h4>
+    <form role="form" method="POST" action="?action=login&do=set">
+        <div class="col-lg-6">
+            <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+            <div class="form-group">
+                <label for="email">Enter Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="email@email.com" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="clave">Enter Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="clave" name="clave" placeholder="Password" required>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="submit" id="submit" value="Log In" class="btn btn-info pull-left">
+        </div>
+</div>
+</form>
+<div class="row">
+    <h4>Register now:</h4>
+    <form role="form" method="POST" action="?action=sign&do=View">
+        <div class="form-group">
+            <input type="submit" name="submit" id="submit" value="Sign It" class="btn btn-info pull-left">
+        </div>
+    </form>
+</div>

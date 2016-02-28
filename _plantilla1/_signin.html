@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <form role="form" action="../login/index.php?action=sign&do=set" method="POST">
+            <div class="col-lg-6">
+                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                
+                <fieldset>
+                    <legend>User</legend>
+                    <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="clave">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="clave" name="clave" placeholder="Password" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="alias">Alias</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="alias" name="alias" placeholder="Password" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                </fieldset>
+                
+                
+                <fieldset>
+                    <legend>Public profile</legend>
+                    <div class="form-group">
+                    <label for="titulo">Title</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Title" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Description</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Description" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="perfil">Profile: Tell a little about you</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="perfil" name="perfil" placeholder="Profile" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="galeria">Gallery: a title for your album</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="galeria" name="galeria" placeholder="Gallery" value=""required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>
+                </fieldset>
+                <br>
+                <input type="submit" id="btsign_form" value="Sign In" class="btn btn-info pull-right">
+            </div>
+        </form>
+
+    </div>
+</div>

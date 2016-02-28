@@ -1,11 +1,17 @@
-
-$(document).ready(function () {
-<<<<<<< HEAD
+$(document).ready(function() {
+    $('[data-submenu]').submenupicker();
     
-=======
-
->>>>>>> ff3f3ddc08a5ef4a24ee6e6a74ad38820b1cb951
-    $('.carousel').carousel({interval: false});
+    $('#todos').on('click', function(){
+        window.location.replace("../index.php#section3");
+    });
+    
+    $('#btsignin').on('click', function(){
+        window.location.replace("../login/index.php?action=sign&do=view");
+    });
+    
+    $('.carousel').carousel({
+        interval: false
+    });
 
     /* affix the navbar after scroll below header */
     $('#nav').affix({
@@ -15,25 +21,31 @@ $(document).ready(function () {
     });
 
     /* highlight the top nav as scrolling occurs */
-    $('body').scrollspy({target: '#nav'})
+    $('body').scrollspy({
+        target: '#nav'
+    })
 
     /* smooth scrolling for scroll to top */
-    $('.scroll-top').click(function () {
-        $('body,html').animate({scrollTop: 0}, 1000);
+    $('.scroll-top').click(function() {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 1000);
     })
 
     /* smooth scrolling for nav sections */
-    $('#nav .navbar-nav li>a').click(function () {
+    $('#nav .navbar-nav li>a').click(function() {
         var link = $(this).attr('href');
         var posi = $(link).offset().top;
-        $('body,html').animate({scrollTop: posi}, 700);
+        $('body,html').animate({
+            scrollTop: posi
+        }, 700);
     });
 
 
     /* copy loaded thumbnails into carousel */
-    $('.panel .img-responsive').on('load', function () {
+    $('.panel .img-responsive').on('load', function() {
 
-    }).each(function (i) {
+    }).each(function(i) {
         if (this.complete) {
             var item = $('<div class="item"></div>');
             var itemDiv = $(this).parent('a');
@@ -49,15 +61,17 @@ $(document).ready(function () {
     });
 
     /* activate the carousel */
-    $('#modalCarousel').carousel({interval: false});
+    $('#modalCarousel').carousel({
+        interval: false
+    });
 
     /* change modal title when slide changes */
-    $('#modalCarousel').on('slid.bs.carousel', function () {
+    $('#modalCarousel').on('slid.bs.carousel', function() {
         $('.modal-title').html($(this).find('.active').attr("title"));
     })
 
     /* when clicking a thumbnail */
-    $('.panel-thumbnail>a').click(function (e) {
+    $('.panel-thumbnail>a').click(function(e) {
 
         e.preventDefault();
         var idx = $(this).parents('.panel').parent().index();
@@ -67,45 +81,31 @@ $(document).ready(function () {
         $('#modalCarousel').carousel(id); // slide carousel to selected
         return false;
     });
-<<<<<<< HEAD
-    
+
     console.log("12borrado");
     "use strict";
-    $("#confirmaborrado").on("click", function (event) {
+    $("#confirmaborrado").on("click", function(event) {
         console.log("borrado");
-        window.location.reload();  
+        window.location.reload();
         if (!confirm('Are you sure you want to delete this picture?')) {
             event.preventDefault();
         }
     });
+
+    $("#subir").on("click", function(event) {
+
+        window.location.reload();
+    });
+
+    // For v2 [data-toggle="dropdown"] is required for [data-submenu].
+    // For v2 .dropdown-submenu > [data-toggle="dropdown"] is forbidden.
     
-     $("#subir").on("click", function (event) {
-        
-        window.location.reload();  
-=======
-
-    "use strict";
-    $("#confirmaborrado").on("click", function (event) {
-
-        window.location.reload();
-        if (!confirm('Are you sure you want to delete this picture?')) {
-            event.preventDefault();
-            console.log("borrado");
-        }
-    });
-
-    $("#subir").on("click", function (event) {
-
-        window.location.reload();
->>>>>>> ff3f3ddc08a5ef4a24ee6e6a74ad38820b1cb951
-    });
-
-
 
     /* google maps */
     google.maps.visualRefresh = true;
 
     var map;
+
     function initialize() {
         var geocoder = new google.maps.Geocoder();
         var address = $('#map-input').text(); /* change the map-input to your address */
@@ -117,17 +117,18 @@ $(document).ready(function () {
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
         if (geocoder) {
-            geocoder.geocode({'address': address}, function (results, status) {
+            geocoder.geocode({
+                'address': address
+            }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
                         map.setCenter(results[0].geometry.location);
 
-                        var infowindow = new google.maps.InfoWindow(
-                                {
-                                    content: address,
-                                    map: map,
-                                    position: results[0].geometry.location,
-                                });
+                        var infowindow = new google.maps.InfoWindow({
+                            content: address,
+                            map: map,
+                            position: results[0].geometry.location,
+                        });
 
                         var marker = new google.maps.Marker({
                             position: results[0].geometry.location,
@@ -135,7 +136,8 @@ $(document).ready(function () {
                             title: address
                         });
 
-                    } else {
+                    }
+                    else {
                         alert("No results found");
                     }
                 }
